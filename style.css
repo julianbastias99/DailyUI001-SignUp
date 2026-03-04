@@ -1,0 +1,257 @@
+:root {
+    --primary-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    --bg-dark: #080808;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-dim: #999;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    /* Fondo con un sutil degradado radial para profundidad */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #080808 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    overflow: hidden;
+}
+
+/* Efecto Hover Lift en el contenedor principal */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    padding: 3rem;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 420px;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.title-gradient {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    background: var(--primary-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+}
+
+/* UX: Floating Labels */
+.input-group {
+    position: relative;
+    margin-bottom: 1.8rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: white;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--glass-border);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    color: var(--text-dim);
+    transition: 0.3s ease all;
+    pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -18px;
+    font-size: 0.75rem;
+    color: #4facfe;
+    font-weight: 600;
+}
+
+.input-group input:focus {
+    border-bottom-color: #4facfe;
+}
+
+/* CTA con jerarquía visual */
+.cta-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: var(--primary-grad);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.2s, filter 0.3s;
+}
+
+.cta-button:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* Efecto Reveal en el footer */
+.form-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.legal-reveal {
+    margin-top: 15px;
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+}
+
+.glass-card:hover .legal-reveal {
+    opacity: 0.8;
+}
+
+.highlight {
+    color: #4facfe;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.a {
+    color: #4facfe;
+}
+
+/* ... (Mantener los estilos anteriores de base) ... */
+
+.auth-content {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: none; /* Ocultos por defecto */
+}
+
+/* Control de visibilidad mediante clases en el padre */
+.show-signup .signup-content {
+    display: block;
+    animation: fadeIn 0.5s forwards;
+}
+
+.show-login .login-content {
+    display: block;
+    animation: fadeIn 0.5s forwards;
+}
+
+.toggle-link {
+    color: #4facfe;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.toggle-link:hover {
+    color: #00f2fe;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilo adicional para los formularios ocultos */
+.show-signup .login-content, 
+.show-login .signup-content {
+    display: none;
+}
+
+
+
+.dev-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #111;
+    color: #4facfe;
+    border: 1px solid #4facfe;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.code-wrapper {
+    position: fixed;
+    inset: 0;
+    background: #0b0b0b;
+    color: #00f2fe;
+    display: none;
+    flex-direction: column;
+    padding: 2rem;
+    z-index: 2000; /* más alto que project-label */
+}
+
+.code-tabs {
+    margin-bottom: 1rem;
+}
+
+.code-tabs button {
+    margin-right: 10px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid #4facfe;
+    color: #4facfe;
+    cursor: pointer;
+}
+
+.code-wrapper pre {
+    flex: 1;
+    overflow: auto;
+    background: #111;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.project-label {
+    position: fixed;
+    top: 30px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 1000;
+}
+
+.project-label span {
+    color: #777;
+}
+
+.project-label strong {
+    font-weight: 600;
+    background: var(--primary-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
